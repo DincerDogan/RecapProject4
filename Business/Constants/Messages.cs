@@ -50,5 +50,14 @@ namespace Business.Constants
         public static string FailedRental = "The car has not yet been delivered";
         public static string CarImageLimitExceeded = "More than 5 images cannot be added";
         public static string NoCarImages = "The car does NOT have any images";
+
+        public static string AuthorizationDenied = "Bu işlemi yapmak için yetkiniz bulunmamaktadır.";
+        public static string AccessTokenCreated = "Access token başarıyla oluşturuldu.";
+        public static string UserAlreadyExists = "Bu kullanıcı zaten mevcut.";
+        public static string SuccessfulLogin = "Sisteme giriş başarılı.";
+        public static string PasswordError = "Şifre hatalıdır.";
+        public static string UserNotFound = "Kullanıcı bulunamadı.";
+
+        public static string UserRegistered { get; internal set; }
     }
 }

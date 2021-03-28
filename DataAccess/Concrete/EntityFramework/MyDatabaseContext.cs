@@ -12,8 +12,8 @@ namespace DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) //projem hangi veritabanıyla ilişkili
         {
-         // optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=RentACar;Trusted_Connection=true"); //@ sembolu \ icin IP ve sifre veya local db hangi veritabanına bağlanacağımızı söylüyoruz
-           optionsBuilder.UseSqlServer(@"Data Source=IC-HW-NB328\SQLEXPRESS;Database=RentACar11;Trusted_Connection=true"); //@ sembolu \ icin IP ve sifre veya local db hangi veritabanına bağlanacağımızı söylüyoruz
+          optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=RentACar;Trusted_Connection=true"); //@ sembolu \ icin IP ve sifre veya local db hangi veritabanına bağlanacağımızı söylüyoruz
+          // optionsBuilder.UseSqlServer(@"Data Source=IC-HW-NB328\SQLEXPRESS;Database=RentACar11;Trusted_Connection=true"); //@ sembolu \ icin IP ve sifre veya local db hangi veritabanına bağlanacağımızı söylüyoruz
 
         }
         //hangi veritabanına bağlanacağımızı söylüyoruz
@@ -32,5 +32,8 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Rental> Rentals { get; set; }
 
         public DbSet<CarImage> CarImages { get; set; }
+
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
     }
 }

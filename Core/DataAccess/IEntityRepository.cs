@@ -18,6 +18,7 @@ namespace DataAccess.Abstract
         //IEntity : IEntity olabilir veya IEntity implemente eden bir nesne olabilir
         //new() : new'lenebilir olmalı
         List<T> GetAll(Expression<Func<T, bool>> filter = null);
+        T Get(Expression<Func<T, bool>> filter);
         T GetById(Expression<Func<T, bool>> filter);//GetById    Get olabilir!!!
         void Add(T entity);
         void Delete(T entity);

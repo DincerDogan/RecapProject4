@@ -21,6 +21,14 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
+        public Brand Get(Expression<Func<Brand, bool>> filter)
+        {
+            using (MyDatabaseContext context = new MyDatabaseContext())
+            {
+                return context.Set<Brand>().SingleOrDefault(filter);
+            }
+        }
+
         public Brand GetById(Expression<Func<Brand, bool>> filter)
         {
             using (MyDatabaseContext context = new MyDatabaseContext())

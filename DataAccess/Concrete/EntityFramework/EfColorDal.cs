@@ -22,6 +22,14 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
+        public Color Get(Expression<Func<Color, bool>> filter)
+        {
+            using (MyDatabaseContext context = new MyDatabaseContext())
+            {
+                return context.Set<Color>().SingleOrDefault(filter);
+            }
+        }
+
         public Color GetById(Expression<Func<Color, bool>> filter)
         {
             using (MyDatabaseContext context = new MyDatabaseContext())
