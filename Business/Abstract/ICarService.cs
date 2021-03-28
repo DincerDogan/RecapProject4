@@ -25,7 +25,7 @@ namespace Business.Abstract
         IDataResult<List<CarDetailDto>> GetCarDetailsByBrandId(int brandId);
         IDataResult<List<Car>> GetAllCarsIsNotNull();
 
-
+        IResult AddTransactionalResult(Car car);
 
     }
 }

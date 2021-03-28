@@ -15,7 +15,9 @@ using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using FluentValidation;
 using ValidationException = FluentValidation.ValidationException;
-
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 
 namespace Business.Concrete
 {
@@ -28,6 +30,7 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        [CacheRemoveAspect("ICarService.Get")]
         [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult AddCar(Car car)
@@ -83,6 +86,7 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        [SecuredOperation("product.add,admin")]
         public IResult DeleteCar(Car car)
         {
             _carDal.Delete(car);
@@ -99,7 +103,8 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
-
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<Car> GetById(int carId)
         {
             return  new SuccessDataResult<Car>(_carDal.GetById(c => c.Id == carId));
@@ -130,6 +135,9 @@ namespace Business.Concrete
         //    return _carDal.GetById( id);
         //}
 
+        [CacheRemoveAspect("ICarService.Get")]
+        [SecuredOperation("product.add,admin")]
+        [ValidationAspect(typeof(CarValidator))]
         public IResult UpdateCar(Car car)
         {
             if (car.DailyPrice > 0 && car.Description.Length > 2)
@@ -144,6 +152,12 @@ namespace Business.Concrete
             else return new ErrorResult(Messages.InvalidRequest);
         }
 
-
+        [TransactionScopeAspect]
+        public IResult AddTransactionalResult(Car car)
+        {
+            _carDal.Add(car);
+            _carDal.Update(car);
+            return null;
+        }
     }
 }
